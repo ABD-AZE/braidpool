@@ -1,5 +1,5 @@
 // Standard Imports
-use std::collections::{HashSet, HashMap};
+use std::collections::{HashMap, HashSet};
 
 // Bitcoin Imports
 use bitcoin::CompactTarget;
@@ -18,10 +18,8 @@ pub enum AddBeadStatus {
     ParentsNotYetReceived,
 }
 
-
 // Type Aliases
 type NumberOfBeadsUnorphaned = usize;
-
 
 pub struct Braid {
     beads: HashSet<BeadHash>,
@@ -131,10 +129,10 @@ impl Braid {
             if let Err(error_type) = parent_bead {
                 match error_type {
                     BeadLoadError::BeadNotFound => return Ok(true),
-                    _ => return Err(error_type)
+                    _ => return Err(error_type),
                 };
             }
-        };
+        }
 
         Ok(false)
     }
@@ -147,7 +145,7 @@ impl Braid {
 
         match self.loaded_beads_in_memory.get(&bead_hash) {
             Some(bead) => Ok(bead),
-            None => Err(BeadLoadError::BeadNotFound)
+            None => Err(BeadLoadError::BeadNotFound),
         }
     }
 
@@ -191,7 +189,7 @@ use std::fmt;
 pub enum BeadLoadError {
     BeadNotFound,
     InvalidBeadHash,
-    DatabaseError
+    DatabaseError,
 }
 
 impl fmt::Display for BeadLoadError {
